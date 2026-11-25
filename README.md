@@ -300,28 +300,20 @@ The login request automatically stores the JWT in the collection variable `token
 
 ## Screenshots
 
-### Event-Driven Logging
+### Event Emitter
+![Event Emitter](screenshots/01-event-emitter.png)
 
-![EventEmitter Logs](screenshots/01-event-emitter.png)
-
-### API Testing
-
-#### 1. Create Note
-
+### Notes CRUD
 ![Create Note](screenshots/02-postman-create-note.png)
-
-#### 2. Get All Notes
-
 ![Get Notes](screenshots/03-postman-get-notes.png)
-
-#### 3. Update Note
-
 ![Update Note](screenshots/04-postman-update-note.png)
-
-#### 4. Delete Note
-
 ![Delete Note](screenshots/05-delete-note.png)
 
+### Authentication and Authorization
+![Signup](screenshots/06-signup.png)
+![Login](screenshots/07-login.png)
+![Protected Route](screenshots/08-protected-no-token.png)
+![Admin Forbidden](screenshots/09-admin-forbidden.png)
 
 
 ### API Testing
