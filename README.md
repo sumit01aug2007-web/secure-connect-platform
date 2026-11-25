@@ -1,41 +1,68 @@
 # Secure Connect and Communication Platform
 
-**Lab 4 | Web Dev III | Unit 4**
+A secure real-time communication platform built using **Node.js, Express.js, MongoDB, JWT Authentication, and Socket.IO**.
 
-A secure backend application built using Node.js, Express.js, MongoDB, bcrypt, JWT, dotenv, and Socket.IO.
+This project demonstrates secure user authentication, role-based access control, protected API routes, CRUD operations, event-driven programming, and real-time communication through chat rooms.
 
-The platform supports secure user authentication, role-based access control, private notes management, real-time communication, and event-driven server logging.
+## 1. Project Overview
 
-## Features
+Secure Connect is a backend-focused web application designed to demonstrate secure communication and authentication mechanisms.
 
-- User registration with bcrypt password hashing (12 salt rounds).
-- Secure login using JSON Web Tokens (JWT).
-- Protected `/api/auth/me` endpoint.
-- Role-Based Access Control (RBAC) for admin-only resources.
-- Private Notes CRUD operations.
-- Notes access restricted to authenticated owners.
-- JWT-authenticated real-time chat using Socket.IO.
-- Chat rooms and real-time message broadcasting.
-- Node.js EventEmitter for event-driven logging.
-- Environment-based configuration using dotenv.
-- MongoDB database integration.
+The application allows users to register and log in securely, access protected resources, manage their notes, and communicate with other users through real-time chat rooms.
 
-## Tech Stack
+It also implements role-based access control to restrict administrative resources to authorized users.
+
+## 2. Technologies Used
 
 | Technology | Purpose |
 |---|---|
-| Node.js | Backend runtime |
-| Express.js | REST API framework |
+| Node.js | Backend runtime environment |
+| Express.js | Server-side framework |
 | MongoDB | Database |
-| Mongoose | MongoDB object modelling |
-| bcrypt | Password hashing |
+| Mongoose | MongoDB object modeling |
+| JavaScript | Application logic |
 | JWT | Authentication |
+| bcrypt | Password hashing |
 | Socket.IO | Real-time communication |
-| EventEmitter | Event-driven architecture |
-| dotenv | Environment configuration |
 | Postman | API testing |
+| HTML & CSS | Chat interface |
+| dotenv | Environment configuration |
 
-## Project Structure
+## 3. Key Features
+
+### User Authentication
+- User registration and login.
+- Password hashing using bcrypt.
+- JWT-based authentication.
+- Secure token-based access.
+
+### Authorization
+- Protected API routes.
+- Role-Based Access Control (RBAC).
+- Separate user and admin permissions.
+- Unauthorized access restriction.
+
+### Notes Management
+- Create notes.
+- Retrieve notes.
+- Update existing notes.
+- Delete notes.
+- Restrict notes access to their respective owners.
+
+### Real-Time Communication
+- Socket.IO integration.
+- JWT authentication for socket connections.
+- Real-time messaging.
+- Multiple chat rooms.
+- Join and leave room notifications.
+- Live message broadcasting.
+
+### Event-Driven Programming
+- EventEmitter implementation.
+- Custom event handling.
+- Event-driven execution.
+
+## 4. Project Structure
 
 ```text
 secure-connect-platform/
@@ -50,17 +77,9 @@ secure-connect-platform/
 │   ├── User.js
 │   └── Note.js
 │
-├── postman/
-│   └── Secure-Connect.postman_collection.json
-│
-├── public/
-│   └── chat.html
-│
 ├── routes/
 │   ├── auth.js
 │   └── notes.js
-│
-├── screenshots/
 │
 ├── socket/
 │   └── chat.js
@@ -68,289 +87,211 @@ secure-connect-platform/
 ├── utils/
 │   └── eventBus.js
 │
+├── public/
+│   └── chat.html
+│
+├── screenshots/
+│   ├── 01-event-emitter.png
+│   ├── 02-postman-create-note.png
+│   ├── 03-postman-get-notes.png
+│   ├── 04-postman-update-note.png
+│   ├── 05-delete-note.png
+│   ├── 06-signup.png
+│   ├── 07-login.png
+│   ├── 08-protected-no-token.png
+│   ├── 09-admin-forbidden.png
+│   ├── 10-chat-connection.png
+│   └── 11-socket-chat.png
+│
+├── server.js
+├── package.json
 ├── .env.example
 ├── .gitignore
-├── package.json
-├── package-lock.json
-├── README.md
-└── server.js
+└── README.md
 ```
 
-## Requirements
+## 5. Installation and Setup
 
-- Node.js 18 or later
-- MongoDB local installation or MongoDB Atlas
-- Postman
-- Git
+### Prerequisites
 
-## Installation and Setup
+- Node.js installed.
+- MongoDB Community Server installed and running.
+- Postman for API testing.
+- Git installed.
 
-### 1. Clone the repository
+### Step 1: Clone the Repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone <your-repository-url>
 ```
 
-### 2. Navigate to the project directory
+### Step 2: Navigate to the Project
 
 ```bash
 cd secure-connect-platform
 ```
 
-### 3. Install dependencies
+### Step 3: Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 4. Configure environment variables
+### Step 4: Configure Environment Variables
 
-Create a `.env` file using the example configuration:
+Create a `.env` file using `.env.example` as a reference.
 
-```powershell
-Copy-Item .env.example .env
+Configure the required MongoDB connection, JWT secret, and server settings.
+
+**Note:** Never upload your actual `.env` file or JWT secrets to GitHub.
+
+### Step 5: Start the Server
+
+For normal execution:
+
+```bash
+npm start
 ```
 
-Configure the following variables in `.env`:
-
-```env
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_long_random_secret
-```
-
-Use your own MongoDB connection string and a strong random JWT secret.
-
-### 5. Start the server
+For development:
 
 ```bash
 npm run dev
 ```
 
-The server will run at:
+The server runs locally on port 5000.
 
-`http://localhost:5000`
+## 6. API Testing Using Postman
 
-## REST API Documentation
+The backend APIs were tested using Postman to verify authentication, authorization, and CRUD functionality.
 
-All request bodies should use `Content-Type: application/json`.
+### Authentication APIs
 
-| Method | Endpoint | Authentication | Description |
-|---|---|---|---|
-| GET | `/` | Not required | API welcome message |
-| GET | `/api/health` | Not required | Health check |
-| POST | `/api/auth/signup` | Not required | Register a user |
-| POST | `/api/auth/login` | Not required | User login |
-| GET | `/api/auth/me` | Bearer JWT | Get current user |
-| GET | `/api/auth/admin` | Admin JWT | Admin-only resource |
-| POST | `/api/notes` | Bearer JWT | Create a note |
-| GET | `/api/notes` | Bearer JWT | Get all own notes |
-| GET | `/api/notes/:id` | Bearer JWT | Get a specific note |
-| PUT | `/api/notes/:id` | Bearer JWT | Update a note |
-| DELETE | `/api/notes/:id` | Bearer JWT | Delete a note |
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/signup` | Register a new user |
+| POST | `/api/auth/login` | Authenticate an existing user |
+| GET | `/api/auth/me` | Retrieve authenticated user details |
+| GET | `/api/auth/admin` | Access admin-protected resources |
 
-## Example API Requests
+### Notes APIs
+
+The application implements CRUD functionality for notes:
+
+- Create Note
+- Get Notes
+- Update Note
+- Delete Note
+
+Protected routes require a valid JWT token.
+
+## 7. API Testing Screenshots
+
+### Event Emitter Implementation
+
+![Event Emitter](screenshots/01-event-emitter.png)
+
+### Create Note
+
+![Create Note](screenshots/02-postman-create-note.png)
+
+### Retrieve Notes
+
+![Get Notes](screenshots/03-postman-get-notes.png)
+
+### Update Note
+
+![Update Note](screenshots/04-postman-update-note.png)
+
+### Delete Note
+
+![Delete Note](screenshots/05-delete-note.png)
+
+## 8. Authentication and Authorization Testing
 
 ### User Registration
 
-**POST** `/api/auth/signup`
-
-```json
-{
-  "username": "victor",
-  "email": "victor@example.com",
-  "password": "StrongPass123"
-}
-```
+![Signup](screenshots/06-signup.png)
 
 ### User Login
 
-**POST** `/api/auth/login`
+![Login](screenshots/07-login.png)
 
-```json
-{
-  "email": "victor@example.com",
-  "password": "StrongPass123"
-}
-```
+### Protected Route Without Token
 
-### Create a Note
+![Protected Route](screenshots/08-protected-no-token.png)
 
-**POST** `/api/notes`
+The API correctly rejects requests when a valid authentication token is not provided.
 
-```json
-{
-  "title": "My First Note",
-  "content": "This is my first secure note."
-}
-```
+### Role-Based Access Control
 
-### Authentication Header
+![Admin Forbidden](screenshots/09-admin-forbidden.png)
 
-Protected endpoints require the following header:
+The application restricts unauthorized users from accessing admin-only resources.
 
-```text
-Authorization: Bearer YOUR_JWT_TOKEN
-```
+## 9. Real-Time Chat Using Socket.IO
 
-## Role-Based Access Control (RBAC)
+The application includes a real-time chat system implemented using Socket.IO.
 
-The application includes an admin-only protected endpoint.
+Users can authenticate using their JWT token, connect to the server, join chat rooms, and exchange messages instantly.
 
-Newly registered users receive the `user` role by default.
+### Chat Connection
 
-To test admin access:
+![Chat Connection](screenshots/10-chat-connection.png)
 
-1. Locate the test user in MongoDB.
-2. Change the user's `role` field to `admin`.
-3. Log in again to receive a new JWT.
-4. Access the admin-only endpoint using the new token.
+### Real-Time Messaging
 
-User roles are managed on the server and cannot be selected during registration.
-
-## Real-Time Chat Using Socket.IO
-
-The application implements real-time communication using Socket.IO.
-
-Clients connect to the server using a valid JWT token.
-
-### Client Connection Example
-
-```javascript
-const socket = io('http://localhost:5000', {
-  auth: {
-    token: 'YOUR_JWT_TOKEN'
-  }
-});
-```
-
-### Join a Chat Room
-
-```javascript
-socket.emit('chat:join', 'general', (result) => {
-  console.log(result);
-});
-```
-
-### Send a Message
-
-```javascript
-socket.emit('chat:message', {
-  room: 'general',
-  message: 'Hello from Secure Connect!'
-});
-```
-
-### Receive Messages
-
-```javascript
-socket.on('chat:message', (message) => {
-  console.log(message);
-});
-```
+![Socket Chat](screenshots/11-socket-chat.png)
 
 ### Socket Events
 
-| Event | Description |
+| Event | Function |
 |---|---|
-| `chat:join` | Join a chat room |
-| `chat:system` | Receive room notifications |
-| `chat:message` | Send and receive chat messages |
-| `disconnect` | Handle socket disconnection |
+| `chat:join` | Join a specific chat room |
+| `chat:message` | Send and receive messages |
+| `chat:system` | Display system notifications |
 
-The Socket.IO middleware verifies JWT authentication before allowing a connection. Users must join a room before sending messages to it.
+The chat system demonstrates real-time, event-based communication between connected clients.
 
-## Event-Driven Architecture
-
-The application uses Node.js's built-in `EventEmitter` through:
-
-`utils/eventBus.js`
-
-It handles the following events:
-
-| Event | Description |
-|---|---|
-| `user:registered` | User registration |
-| `user:login` | User login |
-| `note:created` | Note creation |
-| `note:updated` | Note modification |
-| `note:deleted` | Note deletion |
-| `chat:message` | Chat message activity |
-
-These events generate server-side console logs to monitor application activities.
-
-## Postman Testing
-
-The project includes a Postman collection:
-
-`postman/Secure-Connect.postman_collection.json`
-
-Import the collection into Postman to test the API endpoints.
-
-The collection supports:
-
-- User registration and login.
-- JWT authentication.
-- Protected route testing.
-- Positive and negative authentication tests.
-- Notes CRUD operations.
-- API response verification.
-
-The login request automatically stores the JWT in the collection variable `token`.
-
-
-
-## Screenshots
-
-### 1. Event-Driven Logging
-![Event Emitter](screenshots/01-event-emitter.png)
-
-### 2. Notes CRUD Operations
-
-**Create Note**
-![Create Note](screenshots/02-postman-create-note.png)
-
-**Get Notes**
-![Get Notes](screenshots/03-postman-get-notes.png)
-
-**Update Note**
-![Update Note](screenshots/04-postman-update-note.png)
-
-**Delete Note**
-![Delete Note](screenshots/05-delete-note.png)
-
-### 3. User Authentication
-
-**Signup**
-![Signup](screenshots/06-signup.png)
-
-**Login**
-![Login](screenshots/07-login.png)
-
-### 4. Protected Route Authentication
-![Protected Route Without Token](screenshots/08-protected-no-token.png)
-
-### 5. Role-Based Access Control
-![Admin Access Forbidden](screenshots/09-admin-forbidden.png)
-
-
-## Security Considerations
+## 10. Security Considerations
 
 - Passwords are hashed before being stored in MongoDB.
 - JWT authentication protects private resources.
+- Protected routes require valid authentication.
 - Notes are restricted to their respective owners.
 - Admin permissions are verified on the server.
-- Environment secrets are excluded from version control.
-- Socket.IO connections require valid authentication tokens.
+- Socket connections use JWT authentication.
+- Environment variables are used for sensitive configuration.
 
-For production deployment, additional measures such as HTTPS, rate limiting, stricter CORS policies, input validation, and secret rotation are recommended.
+## 11. Learning Outcomes
 
-## Author
+Through this project, the following concepts were implemented and explored:
 
-**Secure Connect and Communication Platform**
+- Backend development using Node.js and Express.js.
+- Database integration using MongoDB and Mongoose.
+- User authentication using JWT.
+- Password security using bcrypt.
+- Role-Based Access Control.
+- REST API development and testing.
+- CRUD operations.
+- Event-driven programming using EventEmitter.
+- Real-time communication using Socket.IO.
+- Git and GitHub for version control.
 
-Developed as part of Web Dev III, Lab 4, Unit 4.
+## 12. Conclusion
+
+The Secure Connect and Communication Platform demonstrates the implementation of secure backend development practices along with real-time communication functionality.
+
+The project combines authentication, authorization, database management, event-driven programming, and real-time messaging into a single application.
+
+It provides practical experience in developing secure and scalable backend applications using modern JavaScript technologies.
 
 ---
 
-**Note:** Never commit your `.env` file or expose your JWT secret or authentication tokens.
+## Project Submitted By
+
+**Name:** Sumit Bhati  
+**Course:** BCA(AI & DS)  
+**Roll Number:** 2501060223
+
+**Project:** Secure Connect and Communication Platform
