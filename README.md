@@ -298,47 +298,39 @@ The collection supports:
 
 The login request automatically stores the JWT in the collection variable `token`.
 
+
 ## Screenshots
 
-### Event Emitter
+### 1. Event-Driven Logging
 ![Event Emitter](screenshots/01-event-emitter.png)
 
-### Notes CRUD
+### 2. Create Note
 ![Create Note](screenshots/02-postman-create-note.png)
+
+### 3. Get Notes
 ![Get Notes](screenshots/03-postman-get-notes.png)
+
+### 4. Update Note
 ![Update Note](screenshots/04-postman-update-note.png)
+
+### 5. Delete Note
 ![Delete Note](screenshots/05-delete-note.png)
 
-### Authentication and Authorization
+### 6. Authentication Tests
+
+**Signup**
 ![Signup](screenshots/06-signup.png)
+
+**Login**
 ![Login](screenshots/07-login.png)
-![Protected Route](screenshots/08-protected-no-token.png)
-![Admin Forbidden](screenshots/09-admin-forbidden.png)
 
+**Protected Route Without Token**
+![Protected No Token](screenshots/06-protected-no-token.png)
 
-### API Testing
+### 7. Role-Based Access Control
 
-#### 1. Create Note
-
-![Create Note](screenshots/04-create-note.png)
-
-#### 2. Get All Notes
-
-![Get Notes](screenshots/05-get-notes.png)
-
-#### 3. Update Note
-
-![Update Note](screenshots/06-update-note.png)
-
-#### 4. Delete Note
-
-![Delete Note](screenshots/07-delete-note.png)
-
-### Event-Driven Logging
-
-![Event Emitter Logs](screenshots/09-event-emitter.png)
-
-*Additional screenshots covering authentication, authorization, and real-time chat are included in the screenshots folder.*
+**Admin Access Forbidden**
+![Admin Forbidden](screenshots/07-admin-forbidden.png)
 
 ## Security Considerations
 
